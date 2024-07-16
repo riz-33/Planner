@@ -13,6 +13,24 @@
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    
+
+    <div class="container-fluid col-10 col-sm-8 col-md-6 col-lg-5 p-5">
+        <div class="input-container">
+            <i class="fa fa-envelope icon"></i>
+            <input id="email" class="input-field" type="text" placeholder="Email" name="email">
+        </div>
+
+        <div class="input-container">
+            <i class="fa fa-key icon"></i>
+            <input id="password" class="input-field" type="password" placeholder="Password" name="psw">
+        </div>
+
+        <button onclick="loginForm()" type="submit" class="btn">Login</button>
+
+        <p class="para"><span>Don't have an account? <a href="signup.html">Register Now</a></span></p>
+    </div>
+
+    <script src="login.js" type="module"></script>
+
 </body>
 </html>

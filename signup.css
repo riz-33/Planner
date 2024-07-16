@@ -14,10 +14,6 @@ body {
     margin-bottom: 30px;
 } */
 
-.form {
-    margin-top: 10%;
-}
-
 .container-fluid {
     display: flex;
     align-items: center;
