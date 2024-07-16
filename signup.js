@@ -1,54 +1,31 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js'
-
-import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js'
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-    apiKey: "AIzaSyArskEuIydwncRw6bUgsjwMHTE4uy5FupY",
-    authDomain: "to-do-app-ce607.firebaseapp.com",
-    projectId: "to-do-app-ce607",
-    storageBucket: "to-do-app-ce607.appspot.com",
-    messagingSenderId: "811989245686",
-    appId: "1:811989245686:web:57b6628f9d96ffffaa96d7",
-    measurementId: "G-BWDX9TX3XW"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+import {auth, createUserWithEmailAndPassword} from "./firebase.js";
 
 const register = () => {
     const email = document.getElementById("email");
     const password = document.getElementById("password");
-    // const confirmPassword = document.getElementById("confirmPassword");
 
     createUserWithEmailAndPassword(auth, email.value, password.value)
         .then((userCredential) => {
             const user = userCredential.user;
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `Successfully Registered`,
+                showConfirmButton: false,
+                timer: 1500
+            });
             console.log("user-->", user)
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            Swal.fire({
+                icon: "error",
+                title: errorMessage,
+            })
             console.log("errorMessage-->", errorMessage)
         });
 
-    // if (password.value !== confirmPassword.value) {
-    //     Swal.fire({
-    //         icon: "error",
-    //         title: "Password Not Match",
-    //     })
-    // }
-    // else {
-    //     Swal.fire({
-    //         position: "top-end",
-    //         icon: "success",
-    //         title: `You're Successfully Registered`,
-    //         showConfirmButton: false,
-    //         timer: 1500
-    //     });
-    // }
     console.log(email.value, password.value, confirmPassword.value)
 }
 

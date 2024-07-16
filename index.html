@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <script src="https://kit.fontawesome.com/718480b6ff.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div class="container-fluid col-10 col-sm-8 col-md-6 col-lg-4 p-3">
@@ -26,7 +28,7 @@
             <input id="password" class="input-field" type="password" placeholder="Password" name="psw">
         </div>
 
-        <button onclick="loginForm()" type="submit" class="btn">Login</button>
+        <button id="loginBtn" type="submit" class="btn">Login</button>
 
         <p class="para"><span>Don't have an account? <a href="signup.html">Register Now</a></span></p>
         <p class="or">or</p>
@@ -34,10 +36,13 @@
             <i class="fa-brands fa-google"></i>
             <button class="google-btn">Contine with Google</button>
         </div>
-
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="login.js" type="module"></script>
+    <script src="app.js" type="module"></script>
+
 
 </body>
+
 </html>
