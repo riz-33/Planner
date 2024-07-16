@@ -4,15 +4,17 @@
 }
 
 body {
-    font-family: RobotoSlab;        
+    font-family: RobotoSlab;
     background-color: ghostwhite;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
 }
 
-/* .heading {
-    color: #080808;
-    margin-top: 20px;
-    margin-bottom: 30px;
-} */
+.heading {
+    font-weight: 600;
+    margin: 30px;
+}
 
 .container-fluid {
     display: flex;
@@ -74,10 +76,10 @@ body {
     position: absolute;
     content: "";
     display: block;
-    width: 195px;
+    width: 175px;
     height: 2px;
     background: #080808;
-    left: -1500%;
+    left: -1300%;
     top: 50%;
 }
 
@@ -85,10 +87,10 @@ body {
     position: absolute;
     content: "";
     display: block;
-    width: 195px;
+    width: 175px;
     height: 2px;
     background: #080808;
-    right: -1500%;
+    right: -1300%;
     top: 50%;
 }
 
