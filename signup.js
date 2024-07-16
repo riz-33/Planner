@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js'
 
-import { getAuth } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js'
+import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js'
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -18,28 +18,37 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-
-
 const register = () => {
     const email = document.getElementById("email");
     const password = document.getElementById("password");
-    const confirmPassword = document.getElementById("confirmPassword");
+    // const confirmPassword = document.getElementById("confirmPassword");
 
-    if (password.value !== confirmPassword.value) {
-        Swal.fire({
-            icon: "error",
-            title: "Password Not Match",
+    createUserWithEmailAndPassword(auth, email.value, password.value)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log("user-->", user)
         })
-    }
-    else {
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `You're Successfully Registered`,
-            showConfirmButton: false,
-            timer: 1500
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log("errorMessage-->", errorMessage)
         });
-    }
+
+    // if (password.value !== confirmPassword.value) {
+    //     Swal.fire({
+    //         icon: "error",
+    //         title: "Password Not Match",
+    //     })
+    // }
+    // else {
+    //     Swal.fire({
+    //         position: "top-end",
+    //         icon: "success",
+    //         title: `You're Successfully Registered`,
+    //         showConfirmButton: false,
+    //         timer: 1500
+    //     });
+    // }
     console.log(email.value, password.value, confirmPassword.value)
 }
 
