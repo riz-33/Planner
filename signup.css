@@ -1,0 +1,121 @@
+@font-face {
+    font-family: RobotoSlab;
+    src: url(Font/RobotoSlab-Regular.ttf);
+}
+
+body {
+    font-family: RobotoSlab;
+}
+
+/* .heading {
+    color: #080808;
+    margin-top: 20px;
+    margin-bottom: 30px;
+} */
+
+.form {
+    margin-top: 10%;
+}
+
+.container-fluid {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.icon {
+    padding: 15px;
+    background: #5687ff;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+}
+
+.input-field:focus {
+    border: 2px solid #5687ff;
+}
+
+.btn {
+    background-color: #5687ff !important;
+    color: white !important;
+    margin: 10px 0px;
+    padding: 10px !important;
+    border: none !important;
+    cursor: pointer;
+    width: 50% !important;
+    opacity: 0.9 !important;
+    font-weight: 500 !important;
+}
+
+.btn:hover {
+    opacity: 1 !important;
+}
+
+.para {
+    margin-top: 2%;
+    /* font-weight: 700; */
+}
+
+.or{
+    position: relative;
+    font-weight: 700;
+}
+
+.or::before {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 195px;
+    height: 2px;
+    background: #080808;
+    left: -1500%;
+    top: 50%;
+}
+
+.or::after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 195px;
+    height: 2px;
+    background: #080808;
+    right: -1500%;
+    top: 50%;
+}
+
+.social {
+    display: flex;
+    width: 100%;
+}
+
+.google-btn {
+    background-color: #dc2c2b;
+    color: white;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 500;
+    padding-right: 15%;
+}
+
+.fa-google {
+    padding: 15px;
+    padding-left: 20px;
+    margin-top: 10px;
+    background: #dc2c2b;
+    color: white;
+}
