@@ -11,7 +11,7 @@ const profile = () => {
 
     console.log(name.value, email.value, number.value)
     updateProfile(auth.currentUser, {
-        displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
+        displayName: name.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
     }).then(() => {
         // Profile updated!
         // ...
@@ -19,7 +19,7 @@ const profile = () => {
         // An error occurred
         // ...
     });
-    updateEmail(auth.currentUser, "user@example.com")
+    updateEmail(auth.currentUser, email.value)
         .then(() => {
             // Email updated!
             // ...
@@ -27,14 +27,14 @@ const profile = () => {
             // An error occurred
             // ...
         });
-    updatePhoneNumber(auth.currentUser, newPassword)
+    updatePhoneNumber(auth.currentUser, number.value)
         .then(() => {
             // Update successful.
         }).catch((error) => {
             // An error ocurred
             // ...
         });
-    updatePassword(auth.currentUser, newPassword)
+    updatePassword(auth.currentUser, password.value)
         .then(() => {
             // Update successful.
         }).catch((error) => {
