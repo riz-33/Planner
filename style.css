@@ -51,7 +51,7 @@ body {
     width: 100%;
     padding: 10px;
     outline: none;
-    font-size: small;
+    font-size: medium;
 }
 
 .input-field:focus {
