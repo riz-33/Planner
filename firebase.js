@@ -1,6 +1,10 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js'
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js'
+import {
+    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+    onAuthStateChanged, signOut, updateProfile, updateEmail, updatePassword,
+    updatePhoneNumber
+} from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js'
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -19,9 +23,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 export {
-    auth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
+    auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile,
+    updateEmail, updatePassword, updatePhoneNumber
 }
