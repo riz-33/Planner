@@ -1,4 +1,7 @@
-import {auth, signInWithEmailAndPassword} from "./firebase.js";
+import { auth, signInWithEmailAndPassword } from "./firebase.js";
+
+let load = document.getElementById("load");
+let mainContent = document.getElementById("main");
 
 const login = () => {
     const email = document.getElementById("email");
@@ -7,13 +10,15 @@ const login = () => {
     signInWithEmailAndPassword(auth, email.value, password.value)
         .then((userCredential) => {
             const user = userCredential.user;
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: `Successfully Login`,
-                showConfirmButton: false,
-                // timer: 1000
-            });
+            // Swal.fire({
+            //     position: "top-end",
+            //     icon: "success",
+            //     title: `Successfully Registered`,
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // });
+            load.style.display = "block"
+            mainContent.style.display = "none"
             window.location = "todo.html"
             console.log("user-->", user)
         })

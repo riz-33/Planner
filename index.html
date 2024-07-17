@@ -17,24 +17,31 @@
 <body>
 
     <div class="container-fluid col-10 col-sm-8 col-md-6 col-lg-4 p-3">
-        <h1 class="heading">Login</h1>
-        <div class="input-container">
-            <i class="fa fa-envelope icon"></i>
-            <input id="email" class="input-field" type="text" placeholder="Email" name="email">
+
+        <div id="load" class="spinner-border text-primary theme-loader" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
 
-        <div class="input-container">
-            <i class="fa fa-key icon"></i>
-            <input id="password" class="input-field" type="password" placeholder="Password" name="psw">
-        </div>
+        <div id="main" class="main-content col-12 col-sm-12 col-md-12 col-lg-12">
+            <h1 class="heading">Login</h1>
+            <div class="input-container">
+                <i class="fa fa-envelope icon"></i>
+                <input id="email" class="input-field" type="text" placeholder="Email" name="email">
+            </div>
 
-        <button id="loginBtn" type="submit" class="btn">Login</button>
+            <div class="input-container">
+                <i class="fa fa-key icon"></i>
+                <input id="password" class="input-field" type="password" placeholder="Password" name="psw">
+            </div>
 
-        <p class="para"><span>Don't have an account? <a href="signup.html">Register Now</a></span></p>
-        <p class="or">or</p>
-        <div class="social">
-            <i class="fa-brands fa-google"></i>
-            <button class="google-btn">Contine with Google</button>
+            <button id="loginBtn" type="submit" class="btn">Login</button>
+
+            <p class="para"><span>Don't have an account? <a href="signup.html">Register Now</a></span></p>
+            <p class="or">or</p>
+            <div class="social">
+                <i class="fa-brands fa-google"></i>
+                <button class="google-btn">Contine with Google</button>
+            </div>
         </div>
     </div>
 

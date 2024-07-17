@@ -11,6 +11,17 @@ body {
     width: 100%;
 }
 
+.container-fluid {
+    text-align: center;
+}
+
+.theme-loader {
+    margin-top: 10%;
+    width: 100px;
+    height: 100px;
+    display: none;
+}
+
 .heading {
     font-weight: 600;
     margin: 30px;
@@ -40,6 +51,7 @@ body {
     width: 100%;
     padding: 10px;
     outline: none;
+    font-size: small;
 }
 
 .input-field:focus {
