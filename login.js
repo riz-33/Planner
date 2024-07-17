@@ -12,8 +12,9 @@ const login = () => {
                 icon: "success",
                 title: `Successfully Login`,
                 showConfirmButton: false,
-                timer: 1500
+                // timer: 1000
             });
+            window.location = "todo.html"
             console.log("user-->", user)
         })
         .catch((error) => {

@@ -1,0 +1,62 @@
+@font-face {
+    font-family: RobotoSlab;
+    src: url(Font/RobotoSlab-Regular.ttf);
+}
+
+body {
+    font-family: RobotoSlab;
+    background-color: ghostwhite;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+.spinner-border{
+    margin-top: 10%;
+}
+
+.heading {
+    text-align: center;
+    margin: 30px;
+}
+
+.form-control {
+    padding: 10px;
+}
+
+.form-control:hover {
+    border: 2px solid #5687ff;
+}
+
+.btn {
+    background-color: #5687ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.btn:hover {
+    opacity: 1;
+    background-color: #5687ff;
+    color: white;
+}
+
+.btn:focus{
+    color: white !important;
+    background-color: #5687ff !important;
+}
+
+.list-group-item {
+    padding: 10px;
+    outline: none;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.list-group-item:hover {
+    color: #fff;
+    background-color: #5687ff;
+}
