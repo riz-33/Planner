@@ -1,4 +1,4 @@
-import {auth, createUserWithEmailAndPassword} from "./firebase.js";
+import { auth, createUserWithEmailAndPassword, googleProvider, signInWithPopup, GoogleAuthProvider } from "./firebase.js";
 
 let load = document.getElementById("load");
 let mainContent = document.getElementById("main");
@@ -38,3 +38,32 @@ const register = () => {
 let registerBtn = document.getElementById("registerBtn");
 
 registerBtn.addEventListener("click", register);
+
+
+let googleLogin = () => {
+    signInWithPopup(auth, googleProvider)
+        .then((result) => {
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            const user = result.user;
+            load.style.display = "block"
+            mainContent.style.display = "none"
+            window.location = "todo.html"
+            console.log(user)
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            const email = error.customData.email;
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            Swal.fire({
+                icon: "error",
+                title: errorMessage,
+            })
+            console.log (errorMessage)
+        });
+
+}
+
+let googleBtn = document.getElementById("googleBtn");
+
+googleBtn.addEventListener("click", googleLogin);

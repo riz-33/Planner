@@ -8,10 +8,11 @@ const profile = () => {
     const email = document.getElementById("email");
     const number = document.getElementById("number");
     const password = document.getElementById("password");
+    // const photo = document.getElementById ("profileImage")
 
-    console.log(name.value, email.value, number.value)
+    console.log(name.value, email.value, number.value, )
     updateProfile(auth.currentUser, {
-        displayName: name.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
+        displayName: name.value, photoURL:""
     }).then(() => {
         // Profile updated!
         // ...
