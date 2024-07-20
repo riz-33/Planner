@@ -1,4 +1,6 @@
-import { auth, signInWithEmailAndPassword, googleProvider, signInWithPopup, GoogleAuthProvider } from "./firebase.js";
+import {
+    auth, signInWithEmailAndPassword, googleProvider, signInWithPopup, GoogleAuthProvider, doc, setDoc, db
+} from "./firebase.js";
 
 let load = document.getElementById("load");
 let mainContent = document.getElementById("main");
@@ -17,6 +19,7 @@ const login = () => {
             //     showConfirmButton: false,
             //     timer: 1500
             // });
+            addDataToFirestore(user)
             load.style.display = "block"
             mainContent.style.display = "none"
             window.location = "todo.html"
@@ -39,6 +42,17 @@ let loginBtn = document.getElementById("loginBtn");
 
 loginBtn.addEventListener("click", login);
 
+
+let addDataToFirestore = async (user) => {
+    await setDoc(doc(db, "users", user.uid), {
+        name: user.displayName,
+        email: user.email,
+        number: user.phoneNumber,
+        photo: user.photoURL,
+        uid: user.uid
+      });
+}
+
 let googleLogin = () => {
     signInWithPopup(auth, googleProvider)
         .then((result) => {
@@ -49,6 +63,7 @@ let googleLogin = () => {
             mainContent.style.display = "none"
             window.location = "todo.html"
             console.log(user)
+            addDataToFirestore(user)
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;

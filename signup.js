@@ -1,4 +1,6 @@
-import { auth, createUserWithEmailAndPassword, googleProvider, signInWithPopup, GoogleAuthProvider } from "./firebase.js";
+import {
+    auth, createUserWithEmailAndPassword, googleProvider, signInWithPopup, GoogleAuthProvider, doc, setDoc, db,
+} from "./firebase.js";
 
 let load = document.getElementById("load");
 let mainContent = document.getElementById("main");
@@ -40,6 +42,16 @@ let registerBtn = document.getElementById("registerBtn");
 registerBtn.addEventListener("click", register);
 
 
+let addDataToFirestore = async (user) => {
+    await setDoc(doc(db, "users", user.uid), {
+        name: user.displayName,
+        email: user.email,
+        number: user.phoneNumber,
+        photo: user.photoURL,
+        uid: user.uid
+      });
+}
+
 let googleLogin = () => {
     signInWithPopup(auth, googleProvider)
         .then((result) => {
@@ -50,6 +62,7 @@ let googleLogin = () => {
             mainContent.style.display = "none"
             window.location = "todo.html"
             console.log(user)
+            addDataToFirestore(user)
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
@@ -59,7 +72,7 @@ let googleLogin = () => {
                 icon: "error",
                 title: errorMessage,
             })
-            console.log (errorMessage)
+            console.log(errorMessage)
         });
 
 }
