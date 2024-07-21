@@ -15,7 +15,7 @@ const login = () => {
             addDataToFirestore(user)
             loader.style.display = "block"
             mainContent.style.display = "none"
-            window.location = "todo.html"
+            // window.location = "todo.html"
             console.log("user-->", user)
         })
         .catch((error) => {

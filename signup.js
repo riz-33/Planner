@@ -6,6 +6,17 @@ import {
 let loader = document.getElementById("load");
 let mainContent = document.getElementById("main");
 
+let addDataToFirestore = async (user) => {
+    const response = await setDoc(doc(db, "users", user.uid), {
+        name: user.displayName,
+        email: user.email,
+        number: user.phoneNumber,
+        photo: user.photoURL,
+        uid: user.uid
+    });
+    console.log("resp", response)
+}
+
 const register = () => {
     const email = document.getElementById("email");
     const password = document.getElementById("password");
@@ -15,7 +26,8 @@ const register = () => {
             const user = userCredential.user;
             loader.style.display = "block"
             mainContent.style.display = "none"
-            window.location = "todo.html"
+            // window.location = "todo.html"
+            addDataToFirestore(user)
             console.log("user-->", user)
         })
         .catch((error) => {
@@ -34,17 +46,6 @@ const register = () => {
 let registerBtn = document.getElementById("registerBtn");
 
 registerBtn.addEventListener("click", register);
-
-let addDataToFirestore = async (user) => {
-    const response = await setDoc(doc(db, "users", user.uid), {
-        name: user.displayName,
-        email: user.email,
-        number: user.phoneNumber,
-        photo: user.photoURL,
-        uid: user.uid
-    });
-    console.log("resp", response)
-}
 
 let googleLogin = () => {
     signInWithPopup(auth, googleProvider)
