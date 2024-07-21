@@ -23,7 +23,7 @@ onAuthStateChanged(auth, async (user) => {
         }
         // loader.style.display = "block"
         // mainContent.style.display = "none"
-        // console.log("not login")
+        console.log("not login")
     }
 }
 );
