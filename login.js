@@ -52,8 +52,8 @@ let googleLogin = () => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
-            // loader.style.display = "block"
-            // mainContent.style.display = "none"
+            loader.style.display = "block"
+            mainContent.style.display = "none"
             // window.location = "todo.html"
             console.log(user)
             addDataToFirestore(user)

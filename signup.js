@@ -52,10 +52,10 @@ let googleLogin = () => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
-            addDataToFirestore(user)
             loader.style.display = "block"
             mainContent.style.display = "none"
-            window.location = "todo.html"
+            // window.location = "todo.html"
+            addDataToFirestore(user)
             console.log(user)
         }).catch((error) => {
             const errorCode = error.code;
