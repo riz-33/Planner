@@ -1,8 +1,9 @@
 import {
     auth, createUserWithEmailAndPassword, googleProvider, signInWithPopup, GoogleAuthProvider, doc, setDoc, db,
+    onAuthStateChanged, getDoc
 } from "./firebase.js";
 
-let load = document.getElementById("load");
+let loader = document.getElementById("load");
 let mainContent = document.getElementById("main");
 
 const register = () => {
@@ -12,14 +13,7 @@ const register = () => {
     createUserWithEmailAndPassword(auth, email.value, password.value)
         .then((userCredential) => {
             const user = userCredential.user;
-            // Swal.fire({
-            //     position: "top-end",
-            //     icon: "success",
-            //     title: `Successfully Registered`,
-            //     showConfirmButton: false,
-            //     timer: 1500
-            // });
-            load.style.display = "block"
+            loader.style.display = "block"
             mainContent.style.display = "none"
             window.location = "todo.html"
             console.log("user-->", user)
@@ -41,15 +35,15 @@ let registerBtn = document.getElementById("registerBtn");
 
 registerBtn.addEventListener("click", register);
 
-
 let addDataToFirestore = async (user) => {
-    await setDoc(doc(db, "users", user.uid), {
+    const response = await setDoc(doc(db, "users", user.uid), {
         name: user.displayName,
         email: user.email,
         number: user.phoneNumber,
         photo: user.photoURL,
         uid: user.uid
-      });
+    });
+    console.log("resp", response)
 }
 
 let googleLogin = () => {
@@ -58,7 +52,7 @@ let googleLogin = () => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
-            load.style.display = "block"
+            loader.style.display = "block"
             mainContent.style.display = "none"
             window.location = "todo.html"
             console.log(user)
@@ -80,3 +74,26 @@ let googleLogin = () => {
 let googleBtn = document.getElementById("googleBtn");
 
 googleBtn.addEventListener("click", googleLogin);
+
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        console.log("doc",docSnap.data())
+        if (docSnap.data()) {
+            if (location.pathname !== "/todo.html") {
+                window.location = "todo.html"
+            }
+            loader.style.display = "none"
+            mainContent.style.display = "block"
+            console.log(user);
+        }
+    } else {
+        if (location.pathname !== "/signup.html") {
+            window.location = "signup.html"
+        }
+        // loader.style.display = "block"
+        // mainContent.style.display = "none"
+        console.log("not login")
+    }
+});

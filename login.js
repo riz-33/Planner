@@ -2,8 +2,8 @@ import {
     auth, signInWithEmailAndPassword, googleProvider, signInWithPopup, GoogleAuthProvider, doc, setDoc, db
 } from "./firebase.js";
 
-let load = document.getElementById("load");
-let mainContent = document.getElementById("main");
+let loader = document.getElementById("loader");
+let mainContent = document.getElementById("mainContent");
 
 const login = () => {
     const email = document.getElementById("email");
@@ -12,15 +12,8 @@ const login = () => {
     signInWithEmailAndPassword(auth, email.value, password.value)
         .then((userCredential) => {
             const user = userCredential.user;
-            // Swal.fire({
-            //     position: "top-end",
-            //     icon: "success",
-            //     title: `Successfully Registered`,
-            //     showConfirmButton: false,
-            //     timer: 1500
-            // });
             addDataToFirestore(user)
-            load.style.display = "block"
+            loader.style.display = "block"
             mainContent.style.display = "none"
             window.location = "todo.html"
             console.log("user-->", user)
@@ -42,15 +35,15 @@ let loginBtn = document.getElementById("loginBtn");
 
 loginBtn.addEventListener("click", login);
 
-
 let addDataToFirestore = async (user) => {
-    await setDoc(doc(db, "users", user.uid), {
+    const response = await setDoc(doc(db, "users", user.uid), {
         name: user.displayName,
         email: user.email,
         number: user.phoneNumber,
         photo: user.photoURL,
         uid: user.uid
-      });
+    });
+    console.log ("resp", response)
 }
 
 let googleLogin = () => {
@@ -59,9 +52,9 @@ let googleLogin = () => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
-            load.style.display = "block"
-            mainContent.style.display = "none"
-            window.location = "todo.html"
+            // loader.style.display = "block"
+            // mainContent.style.display = "none"
+            // window.location = "todo.html"
             console.log(user)
             addDataToFirestore(user)
         }).catch((error) => {
