@@ -2,6 +2,9 @@ import { auth, onAuthStateChanged, doc, db, getDoc } from "./firebase.js";
 
 let loader = document.getElementById("loader");
 let mainContent = document.getElementById("mainContent");
+const name = document.getElementById("name");
+const email = document.getElementById("email");
+const number = document.getElementById("number");
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
@@ -14,6 +17,9 @@ onAuthStateChanged(auth, async (user) => {
             }
             loader.style.display = "none"
             mainContent.style.display = "block"
+            name.innerHTML = 'Name:' + " " + docSnap.data().name;
+            email.innerHTML = 'Email:' + " " + docSnap.data().email;
+            number.innerHTML = 'Contact No:' + " " + docSnap.data().number;
             console.log(user);
         }
     }
