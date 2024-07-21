@@ -7,7 +7,7 @@ onAuthStateChanged(auth, async (user) => {
     if (user) {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
-        console.log("doc",docSnap.data())
+        console.log("doc", docSnap.data())
         if (docSnap.data()) {
             if (location.pathname !== "/todo.html") {
                 window.location = "todo.html"
@@ -16,15 +16,17 @@ onAuthStateChanged(auth, async (user) => {
             mainContent.style.display = "block"
             console.log(user);
         }
-    } else {
+    }
+    else {
         if (location.pathname !== "/index.html") {
             window.location = "index.html"
         }
         // loader.style.display = "block"
         // mainContent.style.display = "none"
-        console.log("not login")
+        // console.log("not login")
     }
-});
+}
+);
 
 
 // onAuthStateChanged(auth, (user) => {
