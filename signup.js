@@ -18,7 +18,9 @@ let addDataToFirestore = async (user) => {
 }
 
 const register = () => {
+    // const name = document.getElementById("name");
     const email = document.getElementById("email");
+    // const phone = document.getElementById("number");
     const password = document.getElementById("password");
 
     createUserWithEmailAndPassword(auth, email.value, password.value)
@@ -40,7 +42,7 @@ const register = () => {
             console.log("errorMessage-->", errorMessage)
         });
 
-    console.log(email.value, password.value, confirmPassword.value)
+    console.log(name.value, email.value, password.value, number.value)
 }
 
 let registerBtn = document.getElementById("registerBtn");

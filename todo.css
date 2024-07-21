@@ -15,8 +15,24 @@ body {
     text-align: center;
 }
 
-.navbar{
-    text-align: left !important;
+.navbar {
+    background-color: #5687ff !important;
+    border: 1px solid black;
+}
+
+.navbar-brand {
+    margin-left: 10px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.navbar-toggler {
+    margin-right: 10px;
+    background-color: #fff;
+}
+
+.offcanvas{
+    background-color: ghostwhite;
 }
 
 .theme-loader {
@@ -25,7 +41,7 @@ body {
     height: 100px;
 }
 
-.main-content{
+.main-content {
     display: none;
 }
 
@@ -61,6 +77,10 @@ body {
 .btn:focus {
     color: white !important;
     background-color: #5687ff !important;
+}
+
+.logoutBtn{
+    margin-top: 10px;
 }
 
 .list-group-item {
