@@ -5,7 +5,10 @@ import {
     updateProfile, updateEmail, updatePassword, updatePhoneNumber, GoogleAuthProvider, signInWithPopup,
 } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js';
 
-import { doc, setDoc, getDoc, getFirestore, addDoc, updateDoc, collection, onSnapshot, query  }
+import {
+    doc, setDoc, getDoc, getFirestore, addDoc, updateDoc, collection, onSnapshot, query, serverTimestamp, orderBy,
+    where
+}
     from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
 
 // Your web app's Firebase configuration
@@ -30,5 +33,5 @@ const db = getFirestore(app);
 export {
     auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile,
     updateEmail, updatePassword, updatePhoneNumber, googleProvider, signInWithPopup, GoogleAuthProvider, doc, setDoc,
-    db, getDoc, collection, addDoc, updateDoc, onSnapshot, query
+    db, getDoc, collection, addDoc, updateDoc, onSnapshot, query, serverTimestamp, orderBy, where
 }
