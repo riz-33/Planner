@@ -25,3 +25,7 @@ let updateProfile = async () => {
 let profileBtn = document.getElementById("profileBtn");
 
 profileBtn.addEventListener("click", updateProfile); 
+
+let uploadImage = () => {
+    
+}

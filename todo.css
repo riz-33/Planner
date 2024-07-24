@@ -35,6 +35,25 @@ body {
     background-color: ghostwhite;
 }
 
+.userImage{
+    display: flex;
+    justify-content: center;
+}
+
+.avatar{
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #1f232826;
+    display: inline-block;
+    flex-shrink: 0;
+    line-height: 1;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 40%;
+    background-color: #fff;
+    border: 1px solid #d0d7de;
+}
+
 .theme-loader {
     margin-top: 10%;
     width: 100px;
