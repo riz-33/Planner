@@ -26,18 +26,19 @@ let profileBtn = document.getElementById("profileBtn");
 
 profileBtn.addEventListener("click", updateProfile);
 
-const uploadImage = () => {
-    const profileImage = document.getElementById ("profileImage")
+// const uploadImage = () => {
+//     const profileImage = document.getElementById ("profileImage")
 
-    console.log (profileImage.files[0])
-}
+//     console.log (profileImage.files[0])
+// }
 
-const imageBtn = document.getElementById("imageBtn")
-imageBtn.addEventListener("click", uploadImage)
+// const imageBtn = document.getElementById("imageBtn")
+// imageBtn.addEventListener("click", uploadImage)
 
 profileImage.addEventListener ("change", (e)=>{
     const avatar = document.getElementById ("avatar")
     
     avatar.src = URL.createObjectURL (e.target.files[0])
+    console.log (profileImage.files[0])
 })
 
