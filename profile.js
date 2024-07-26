@@ -24,8 +24,20 @@ let updateProfile = async () => {
 
 let profileBtn = document.getElementById("profileBtn");
 
-profileBtn.addEventListener("click", updateProfile); 
+profileBtn.addEventListener("click", updateProfile);
 
-let uploadImage = () => {
-    
+const uploadImage = () => {
+    const profileImage = document.getElementById ("profileImage")
+
+    console.log (profileImage.files[0])
 }
+
+const imageBtn = document.getElementById("imageBtn")
+imageBtn.addEventListener("click", uploadImage)
+
+profileImage.addEventListener ("change", (e)=>{
+    const avatar = document.getElementById ("avatar")
+    
+    avatar.src = URL.createObjectURL (e.target.files[0])
+})
+

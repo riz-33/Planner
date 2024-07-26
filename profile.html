@@ -25,9 +25,13 @@
         <div class="main-content col-12 col-sm-12 col-md-12 col-lg-12">
             <h1 class="heading">Update Profile</h1>
 
-            <div id="userImage" class="userImage">
-                <img style="height:auto;" alt="" src="/Images/user.png" width="260"
-                    height="260" class="avatar avatar-user width-full border color-bg-default">
+            <div class="userImage">
+                <label id="imageBtn" for="profileImage">
+                    <img width="260" height="260" id="avatar" class="avatar" src="/Images/user.png" alt="">
+                    <br>
+                    <a style="cursor: pointer;"> Change Profile Image</a>
+                </label>
+                <input type="file" name="profileImage" id="profileImage" style="display: none;">
             </div>
 
             <div class="input-container">
