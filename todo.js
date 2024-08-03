@@ -1,4 +1,7 @@
-import { auth, signOut, addDoc, collection, db, onSnapshot, query, serverTimestamp, orderBy, where } from "./firebase.js";
+import {
+    auth, signOut, addDoc, collection, db, onSnapshot, query, serverTimestamp, orderBy, where, getDoc, doc,
+    onAuthStateChanged
+} from "./firebase.js";
 
 let logout = () => {
     signOut(auth).then(() => {
@@ -10,35 +13,50 @@ let logout = () => {
 }
 
 let logoutBtn = document.getElementById("logoutBtn");
-
 logoutBtn.addEventListener("click", logout);
 
-let addTodo = async () => {
-    let todo = document.getElementById("todo");
-    const docRef = await addDoc(collection(db, "todos"), {
-        value: todo.value,
-        timestamp: serverTimestamp(),
-        status: "pending"
-    });
-    console.log("Document written with ID: ", docRef.id);
-    console.log(todo.value)
-}
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        // console.log("doc", docSnap.data())
 
-let addTodoBtn = document.getElementById("addTodoBtn");
+        let addTodo = async () => {
+            let todo = document.getElementById("todo");
+            const docRef = await addDoc(collection(db, "users", docSnap.data().uid, "todos"), {
+                value: todo.value,
+                timestamp: serverTimestamp(),
+                status: "pending"
+            });
+            console.log("Document written with ID: ", docRef.id);
+            console.log(todo.value)
+            todo.value = "";
+        }
+        let addTodoBtn = document.getElementById("addTodoBtn");
+        addTodoBtn && addTodoBtn.addEventListener('click', addTodo)
 
-addTodoBtn && addTodoBtn.addEventListener('click', addTodo)
+    }
+});
 
 
-let getAllTodos = async () => {
-    const ref = query(collection(db, "todos"), orderBy("timestamp", "desc"), where ("status", "==", "completed"));
-    const todoList = document.getElementById("todoList");
-    const unsubscribe = onSnapshot(ref, (querySnapshot) => {
-        todoList.innerHTML = "";
-        querySnapshot.forEach((doc) => {
-            todoList.innerHTML += `<li class="list-group-item">${doc.data().value}</li>`;
-            // todo.innerHTML = "",
-        });
-    });
-}
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        let userID = docSnap.data().uid;
+        console.log(userID)
 
-getAllTodos();
+        let getAllTodos = async () => {
+            const ref = query(collection(db, "users", docSnap.data().uid, "todos"),
+                orderBy("timestamp", "desc"), where("status", "==", "pending"));
+            const todoList = document.getElementById("todoList");
+            const unsubscribe = onSnapshot(ref, (querySnapshot) => {
+                todoList.innerHTML = "";
+                querySnapshot.forEach((doc) => {
+                    todoList.innerHTML += `<li class="list-group-item">${doc.data().value}</li>`;
+                });
+            });
+        }
+        getAllTodos();
+    }
+});

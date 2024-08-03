@@ -52,25 +52,7 @@ onAuthStateChanged(auth, async (user) => {
         // mainContent.style.display = "none"
         console.log("not login")
     }
+
 }
 );
 
-
-// onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//         const uid = user.uid;
-//         // if (location.pathname !== "/todo.html") {
-//         //     window.location = "todo.html"
-//         // }
-//         loader.style.display = "none"
-//         mainContent.style.display = "block"
-//         console.log(user);
-//     } else {
-//         // if (location.pathname !== "/index.html") {
-//         //     window.location = "index.html"
-//         // }
-//         // loader.style.display = "block"
-//         // mainContent.style.display = "none"
-//         console.log("not login")
-//     }
-// });
