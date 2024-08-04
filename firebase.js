@@ -7,11 +7,12 @@ import {
 
 import {
     doc, setDoc, getDoc, getFirestore, addDoc, updateDoc, collection, onSnapshot, query, serverTimestamp, orderBy,
-    where, getDocs
+    where, getDocs, deleteField
 }
     from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
 
-import { getStorage, ref, uploadBytesResumable, getDownloadURL  } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-storage.js';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL }
+    from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-storage.js';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -37,5 +38,5 @@ export {
     auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile,
     updateEmail, updatePassword, updatePhoneNumber, googleProvider, signInWithPopup, GoogleAuthProvider, doc, setDoc,
     db, getDoc, collection, addDoc, updateDoc, onSnapshot, query, serverTimestamp, orderBy, where, ref, getStorage,
-    getDownloadURL, uploadBytesResumable, storage, getDocs
+    getDownloadURL, uploadBytesResumable, storage, getDocs, deleteField
 }

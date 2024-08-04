@@ -1,6 +1,6 @@
 import {
     auth, signOut, addDoc, collection, db, onSnapshot, query, serverTimestamp, orderBy, where, getDoc, doc,
-    onAuthStateChanged
+    onAuthStateChanged, updateDoc, deleteField
 } from "./firebase.js";
 
 let logout = () => {
@@ -53,10 +53,11 @@ onAuthStateChanged(auth, async (user) => {
             const unsubscribe = onSnapshot(ref, (querySnapshot) => {
                 todoList.innerHTML = "";
                 querySnapshot.forEach((doc) => {
-                    todoList.innerHTML += `<li class="list-group-item">${doc.data().value}</li>`;
+                    todoList.innerHTML += `<li id="todoListItem" class="list-group-item">${doc.data().value}</li>`;
                 });
             });
         }
         getAllTodos();
     }
 });
+
