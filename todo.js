@@ -1,6 +1,6 @@
 import {
     auth, signOut, addDoc, collection, db, onSnapshot, query, serverTimestamp, orderBy, where, getDoc, doc,
-    onAuthStateChanged, updateDoc, deleteField
+    onAuthStateChanged, updateDoc, deleteField, getDocs
 } from "./firebase.js";
 
 let logout = () => {
@@ -61,3 +61,16 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
+let deleteTodo = async () => {
+    const querySnapshot = await getDocs(collection(db, "users", "dXn0pZ4wfjQZURwdCMBhod9XPnF2", "todos"));
+    querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+    });
+    const todoRef = doc(db, 'users', 'dXn0pZ4wfjQZURwdCMBhod9XPnF2', 'todos', doc.id);
+    await updateDoc(todoRef, {
+        status: "completed"
+    });
+}
+
+let todoList = document.getElementById("todoList");
+todoList.addEventListener('dblclick', deleteTodo);
