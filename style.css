@@ -62,7 +62,7 @@ body {
 
 .icon {
     padding: 15px;
-    background: #5687ff;
+    background: #397b44;
     color: white;
     min-width: 50px;
     text-align: center;
@@ -76,11 +76,11 @@ body {
 }
 
 .input-field:focus {
-    border: 2px solid #5687ff;
+    border: 2px solid #5cbf7e;
 }
 
 .btn {
-    background-color: #5687ff !important;
+    background-color: #397b44 !important;
     color: white !important;
     margin: 10px 0px;
     padding: 10px !important;

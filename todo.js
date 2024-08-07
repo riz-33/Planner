@@ -1,6 +1,6 @@
 import {
     auth, signOut, addDoc, collection, db, onSnapshot, query, serverTimestamp, orderBy, where, getDoc, doc,
-    onAuthStateChanged, updateDoc, deleteField, getDocs
+    onAuthStateChanged, updateDoc
 } from "./firebase.js";
 
 let logout = () => {
@@ -19,7 +19,6 @@ onAuthStateChanged(auth, async (user) => {
     if (user) {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
-        // console.log("doc", docSnap.data())
 
         let addTodo = async () => {
             let todo = document.getElementById("todo");
@@ -38,7 +37,6 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
-
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         const docRef = doc(db, "users", user.uid);
@@ -53,24 +51,27 @@ onAuthStateChanged(auth, async (user) => {
             const unsubscribe = onSnapshot(ref, (querySnapshot) => {
                 todoList.innerHTML = "";
                 querySnapshot.forEach((doc) => {
-                    todoList.innerHTML += `<li id="todoListItem" class="list-group-item">${doc.data().value}</li>`;
+                    const li = document.createElement("li");
+                    li.innerText = doc.data().value;
+                    li.id = doc.id;
+                    todoList.appendChild(li);
+                    li.classList.add("list-group-item");
                 });
             });
-        }
+        };
         getAllTodos();
+
+        let deleteTodo = async () => {
+            const getID = async (event) => {
+                const id = event.target.closest("li").getAttribute("id")
+                const todoRef = doc(db, 'users', docSnap.data().uid, 'todos', id);
+                await updateDoc(todoRef, {
+                    status: "completed"
+                });
+                console.log(id)
+            }
+            todoList.addEventListener('dblclick', getID);
+        }
+        deleteTodo();
     }
 });
-
-let deleteTodo = async () => {
-    const querySnapshot = await getDocs(collection(db, "users", "dXn0pZ4wfjQZURwdCMBhod9XPnF2", "todos"));
-    querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-    });
-    const todoRef = doc(db, 'users', 'dXn0pZ4wfjQZURwdCMBhod9XPnF2', 'todos', doc.id);
-    await updateDoc(todoRef, {
-        status: "completed"
-    });
-}
-
-let todoList = document.getElementById("todoList");
-todoList.addEventListener('dblclick', deleteTodo);
