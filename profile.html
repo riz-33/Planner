@@ -11,46 +11,23 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/718480b6ff.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profile.css">
 
 </head>
 
 <body>
     <div class="container-fluid col-10 col-sm-8 col-md-6 col-lg-4 p-3">
 
-        <div class="spinner-border text-primary theme-loader" role="status">
+        <div id="loader" class="spinner-border text-primary theme-loader" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
         
-        <div class="main-content col-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="mainContent" class="main-content col-12 col-sm-12 col-md-12 col-lg-12">
             <h1 class="heading">Update Profile</h1>
-                <label class="mb-2" id="imageBtn" for="profileImage">
-                    <a style="cursor: pointer;" class="image">
-                        <img id="avatar" class="avatar" src="/Images/user.png" alt="">
-                    </a>
-                </label>
-                <input type="file" name="profileImage" id="profileImage" style="display: none;">
-
-            <div class="input-container">
-                <i class="fa-solid fa-user icon"></i>
-                <input id="name" class="input-field" type="text" placeholder="Name" name="name">
-            </div>
-
-            <div class="input-container">
-                <i class="fa fa-envelope icon"></i>
-                <input id="email" class="input-field" type="email" placeholder="Email" name="email">
-            </div>
-
-            <div class="input-container">
-                <i class="fa-solid fa-phone icon"></i>
-                <input id="number" class="input-field" type="number" placeholder="Contact number" name="number">
-            </div>
-
-            <!-- <div class="input-container">
-                <i class="fa fa-key icon"></i>
-                <input id="password" class="input-field" type="password" placeholder="Password" name="password">
-            </div> -->
-
+            <div id="userImage" class="userImage"></div>
+            <div id="name" class="input-container"></div>
+            <div id="email" class="input-container"></div>
+            <div id="number" class="input-container"></div>
             <button id="profileBtn" type="submit" class="btn">Update Profile</button>
         </div>
     </div>

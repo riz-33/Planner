@@ -22,18 +22,25 @@ onAuthStateChanged(auth, async (user) => {
 
         let addTodo = async () => {
             let todo = document.getElementById("todo");
-            const docRef = await addDoc(collection(db, "users", docSnap.data().uid, "todos"), {
-                value: todo.value,
-                timestamp: serverTimestamp(),
-                status: "pending"
-            });
-            console.log("Document written with ID: ", docRef.id);
-            console.log(todo.value)
-            todo.value = "";
+            if (todo.value.trim()) {
+                const docRef = await addDoc(collection(db, "users", docSnap.data().uid, "todos"), {
+                    value: todo.value,
+                    timestamp: serverTimestamp(),
+                    status: "pending"
+                });
+                todo.value = "";
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Please Enter Your Task!",
+                });
+            }
         }
+        console.log("Document written with ID: ", docRef.id);
+        console.log(todo.value)
         let addTodoBtn = document.getElementById("addTodoBtn");
         addTodoBtn && addTodoBtn.addEventListener('click', addTodo)
-
     }
 });
 

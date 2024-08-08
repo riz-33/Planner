@@ -40,7 +40,7 @@ onAuthStateChanged(auth, async (user) => {
             } else {
                 number.innerHTML = 'Contact No:' + " " + 'Not Found';
             }
-            
+
             console.log(user);
         }
     }
@@ -52,7 +52,6 @@ onAuthStateChanged(auth, async (user) => {
         // mainContent.style.display = "none"
         console.log("not login")
     }
-
 }
 );
 

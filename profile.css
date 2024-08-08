@@ -21,6 +21,11 @@ body {
     height: 100px;
     display: none;
     color: #397b44 !important;
+    display: block;
+}
+
+.main-content{
+    display: none;
 }
 
 .heading {
@@ -48,7 +53,6 @@ body {
     line-height: 1;
     overflow: hidden;
     vertical-align: middle;
-    /* width: 200%; */
     background-color: #fff;
     border: 1px solid #d0d7de;
 }
@@ -100,61 +104,4 @@ body {
 
 .btn:hover {
     opacity: 1 !important;
-}
-
-.para {
-    margin-top: 2%;
-    /* font-weight: 700; */
-}
-
-.or {
-    position: relative;
-    font-weight: 700;
-}
-
-.or::before {
-    position: absolute;
-    content: "";
-    display: block;
-    width: 175px;
-    height: 2px;
-    background: #080808;
-    left: -1300%;
-    top: 50%;
-}
-
-.or::after {
-    position: absolute;
-    content: "";
-    display: block;
-    width: 175px;
-    height: 2px;
-    background: #080808;
-    right: -1300%;
-    top: 50%;
-}
-
-.social {
-    display: flex;
-    width: 100%;
-}
-
-.google-btn {
-    background-color: #dc2c2b;
-    color: white;
-    margin-top: 10px;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    font-weight: 500;
-    padding-right: 15%;
-}
-
-.fa-google {
-    padding: 15px;
-    padding-left: 20px;
-    margin-top: 10px;
-    background: #dc2c2b;
-    color: white;
 }
