@@ -32,7 +32,7 @@ onAuthStateChanged(auth, async (user) => {
             } else {
                 Swal.fire({
                     icon: "error",
-                    title: "Oops...",
+                    // title: "Oops...",
                     text: "Please Enter Your Task!",
                 });
             }
