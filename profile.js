@@ -59,7 +59,7 @@ onAuthStateChanged(auth, async (user) => {
                 placeholder="Number" name="Number"></input>`;
             }
         }
-        console.log(docSnap.data().name);
+        console.log(docSnap.data().number);
 
         let updateProfile = async () => {
             const nameUpdate = document.getElementById("nameUpdate")
@@ -67,11 +67,35 @@ onAuthStateChanged(auth, async (user) => {
             const numberUpdate = document.getElementById("numberUpdate")
 
             const userRef = doc(db, "users", user.uid);
-            await updateDoc(userRef, {
-                name: nameUpdate.value,
-                email: emailUpdate.value,
-                number: numberUpdate.value
-            });
+            if (docSnap.data().name === "" || docSnap.data().name === null){
+                await updateDoc (userRef,{
+                    name : nameUpdate.value
+                });
+            }else {
+                await updateDoc (userRef,{
+                    name: docSnap.data().name
+                });
+            };
+
+            if (docSnap.data().email === "" || docSnap.data().email === null){
+                await updateDoc (userRef,{
+                    email : emailUpdate.value
+                });
+            }else {
+                await updateDoc (userRef,{
+                    email: docSnap.data().email
+                });
+            };
+
+            if (docSnap.data().number === "" || docSnap.data().number === null){
+                await updateDoc (userRef,{
+                    number : numberUpdate.value
+                });
+            }else {
+                await updateDoc (userRef,{
+                    number: docSnap.data().number
+                });
+            };
             console.log(number)
             Swal.fire({
                 position: "top-end",
@@ -80,11 +104,10 @@ onAuthStateChanged(auth, async (user) => {
                 showConfirmButton: false
             });
             console.log("Profile Updated")
-            // window.location = "todo.html"
+            window.location = "todo.html"
         }
         let profileBtn = document.getElementById("profileBtn");
         profileBtn.addEventListener("click", updateProfile);
-
     }
 });
 
