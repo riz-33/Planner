@@ -40,12 +40,13 @@ body {
 }
 
 .userImage{
-    display: flex;
+    /* display: flex; */
     justify-content: center;
+    /* position: relative; */
 }
 
 .avatar{
-    height: auto;
+    /* height: auto; */
     border-radius: 50%;
     box-shadow: 0 0 0 1px #1f232826;
     display: inline-block;
@@ -55,6 +56,14 @@ body {
     vertical-align: middle;
     background-color: #fff;
     border: 1px solid #d0d7de;
+    object-fit: cover;
+}
+
+.file{
+    font-size: smaller;
+    justify-content: center;
+    font-family: RobotoSlab;
+    margin-left: 20%;
 }
 
 .input-container {
@@ -83,6 +92,7 @@ body {
     padding: 10px;
     outline: auto;
     font-size: medium;
+    overflow: auto;
     text-align: left;
 }
 

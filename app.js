@@ -20,11 +20,11 @@ onAuthStateChanged(auth, async (user) => {
             mainContent.style.display = "block"
 
             if (docSnap.data().photo) {
-                userImage.innerHTML = `<img style="height:auto;" alt="" src=${docSnap.data().photo} width="260"
-                height="260" class="avatar avatar-user width-full border color-bg-default">`
+                userImage.innerHTML = `<img alt="" src=${docSnap.data().photo} width="200"
+                height="200" class="avatar">`
             } else {
-                userImage.innerHTML = `<img style="height:auto;" alt="" src="/Images/user.png" width="260"
-                height="260" class="avatar avatar-user width-full border color-bg-default">`
+                userImage.innerHTML = `<img style="height:auto;" alt="" src="/Images/user.png" width="200"
+                height="200" class="avatar">`
             }
 
             if (docSnap.data().name) {

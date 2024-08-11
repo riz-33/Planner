@@ -23,16 +23,20 @@ onAuthStateChanged(auth, async (user) => {
 
             if (docSnap.data().photo) {
                 userImage.innerHTML = `
-                    <img alt="" src=${docSnap.data().photo} width="200"
-                height="200" class=" mb-2 avatar avatar-user width-full border color-bg-default">`
+                    <img alt="" id="uploadIcon" src=${docSnap.data().photo} width="200"
+                height="200" class=" mb-1 avatar avatar-user width-full border color-bg-default">
+                <input type="file" id="file" class="file" style="display: none;"  />`
             } else {
-                userImage.innerHTML = `<label class="mb-2" id="imageBtn" for="profileImage">
-                    <a style="cursor: pointer;" class="image">
-                    <img style="height:auto;" alt="" src="/Images/user.png" width="200"
-                height="200" class="avatar avatar-user width-full border color-bg-default">
-                    </a>
-                </label>
-                <input type="file" name="profileImage" id="profileImage" style="display: none;">`
+                userImage.innerHTML =
+                    `<img class="mb-1 avatar" id="uploadIcon" src="/Images/user-plus.png" 
+                style="width: 200px; height: 200px; cursor: pointer;" /> 
+                    <input type="file" id="file" class="file" style="display: none;"  />`
+                // `<label class="mb-2" id="imageBtn" for="profileImage">
+                // <a style="cursor: pointer;" class="image">
+                // <img id="uploadIcon" alt="" src="/Images/user.png" width="200"
+                // height="200" class="avatar"></a>
+                // </label>
+                // <input type="file" name="profileImage" id="file" >`
             }
             if (docSnap.data().name) {
                 name.innerHTML = `<i class="fa-solid fa-user icon"></i> 
@@ -59,159 +63,129 @@ onAuthStateChanged(auth, async (user) => {
                 placeholder="Number" name="Number"></input>`;
             }
         }
-        console.log(docSnap.data().number);
+        console.log(docSnap.data().photo);
+
+        document.getElementById('uploadIcon').addEventListener('click', function () {
+            document.getElementById('file').click();
+        });
+        const file = document.getElementById("file");
+        file.addEventListener("change", (e) => {
+            const uploadIcon = document.getElementById("uploadIcon");
+            uploadIcon.src = URL.createObjectURL(e.target.files[0])
+        });
+
+        const uploadImageToFirestore = (file) => {
+            return new Promise((resolve, reject) => {
+                // const fileName = file.name
+                const storageRef = ref(storage, user.uid);
+                const uploadTask = uploadBytesResumable(storageRef, file);
+
+                uploadTask.on('state_changed',
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log('Upload is ' + Math.round(progress) + '% done');
+                        switch (snapshot.state) {
+                            case 'paused':
+                                console.log('Upload is paused');
+                                break;
+                            case 'running':
+                                console.log('Upload is running');
+                                break;
+                        }
+                    },
+                    (error) => {
+                        reject(error)
+                    },
+                    () => {
+                        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                            resolve(downloadURL);
+                        });
+                    }
+                );
+            });
+        }
+        const uploadFile = async () => {
+            const file = document.getElementById("file");
+            const url = await uploadImageToFirestore(file.files[0])
+            const uploadIcon = document.getElementById("uploadIcon");
+            uploadIcon.src = url
+            console.log("uploadIcon", uploadIcon, "file", file);
+
+            const userRef = doc(db, "users", user.uid);
+            if (docSnap.data().photo === "" || docSnap.data().photo === null) {
+                await updateDoc(userRef, {
+                    photo: url
+                });
+            } else {
+                await updateDoc(userRef, {
+                    photo: docSnap.data().photo
+                });
+            };
+            console.log("Image Updated")
+            // window.location = "todo.html"
+        };
 
         let updateProfile = async () => {
             const nameUpdate = document.getElementById("nameUpdate")
             const emailUpdate = document.getElementById("emailUpdate")
             const numberUpdate = document.getElementById("numberUpdate")
-
+            
             const userRef = doc(db, "users", user.uid);
-            if (docSnap.data().name === "" || docSnap.data().name === null){
-                await updateDoc (userRef,{
-                    name : nameUpdate.value
+            if (docSnap.data().name === "" || docSnap.data().name === null) {
+                await updateDoc(userRef, {
+                    name: nameUpdate.value
                 });
-            }else {
-                await updateDoc (userRef,{
+            } else {
+                await updateDoc(userRef, {
                     name: docSnap.data().name
                 });
             };
-
-            if (docSnap.data().email === "" || docSnap.data().email === null){
-                await updateDoc (userRef,{
-                    email : emailUpdate.value
+            
+            if (docSnap.data().email === "" || docSnap.data().email === null) {
+                await updateDoc(userRef, {
+                    email: emailUpdate.value
                 });
-            }else {
-                await updateDoc (userRef,{
+            } else {
+                await updateDoc(userRef, {
                     email: docSnap.data().email
                 });
             };
 
-            if (docSnap.data().number === "" || docSnap.data().number === null){
-                await updateDoc (userRef,{
-                    number : numberUpdate.value
+            if (docSnap.data().number === "" || docSnap.data().number === null) {
+                await updateDoc(userRef, {
+                    number: numberUpdate.value
                 });
-            }else {
-                await updateDoc (userRef,{
+            } else {
+                await updateDoc(userRef, {
                     number: docSnap.data().number
                 });
             };
             console.log(number)
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Profile Updated",
-                showConfirmButton: false
-            });
+            const imageUpload = await uploadFile();
+            // Swal.fire({
+            //     position: "top-end",
+            //     icon: "success",
+            //     title: "Profile Updated",
+            //     showConfirmButton: false
+            // });
             console.log("Profile Updated")
+            // if (location.pathname !== "/todo.html") {
+            //     window.location = "todo.html"
+            // }
+            // loader.style.display = "block"
+            // mainContent.style.display = "none"
+    
+            
             window.location = "todo.html"
         }
-        let profileBtn = document.getElementById("profileBtn");
+        
+        // let profileBtn = document.getElementById("profileBtn");
+        // profileBtn.addEventListener("click", updateProfile);
+
+
+
+        const profileBtn = document.getElementById("profileBtn");
         profileBtn.addEventListener("click", updateProfile);
+        // uploadIcon.addEventListener ("change", uploadFile)
     }
 });
-
-            // if (docSnap.data()) {
-            //     if (docSnap.data().name) {
-            //         name: docSnap.data().name
-            //     }
-            //     else if (docSnap.data().email) {
-            //         email: docSnap.data().email
-            //     }
-            //     else if (docSnap.data().number) {
-            //         number: docSnap.data().number
-            //     }
-            // } else {
-                // }
-
-                
-
-// const uploadToStorage = (profileImage) => {
-//     return new Promise((resolve, reject) => {
-//         const fileName = profileImage.name;
-//         const storageRef = ref(storage, `users/user.uid`);
-
-//         const uploadTask = uploadBytesResumable(storageRef, profileImage);
-//         uploadTask.on('state_changed',
-//             (snapshot) => {
-//                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-//                 console.log('Upload is ' + Math.round(progress) + '% done');
-//                 switch (snapshot.state) {
-//                     case 'paused':
-//                         console.log('Upload is paused');
-//                         break;
-//                     case 'running':
-//                         console.log('Upload is running');
-//                         break;
-//                 }
-//             },
-//             (error) => {
-//                 reject(error)
-//             },
-//             () => {
-//                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-//                     resolve(downloadURL);
-//                 });
-//             }
-//         );
-//     })
-// }
-
-
-
-
-// profileImage.addEventListener("click", uploadToStorage)
-
-// const uploadImage = () => {
-//     const profileImage = document.getElementById("profileImage")
-
-//     console.log(profileImage.files[0])
-// }
-// profileImage.addEventListener("change", (e) => {
-
-// })
-
-// const imageBtn = document.getElementById("imageBtn")
-// imageBtn.addEventListener("click", uploadImage)
-
-// const uploadImage = async () => {
-
-
-
-// profileImage.addEventListener("change", (e) => {
-//     const url = uploadToStorage(profileImage.files[0])
-//     const avatar = document.getElementById("avatar");
-//     avatar.src = URL.createObjectURL(e.target.files[0]);
-//     console.log(profileImage.files[0].name);
-// })
-
-
-
-
-
-// let downloadFile = () => {
-//     getDownloadURL(ref(storage, 'users/user.uid'))
-//         .then((url) => {
-//             console.log(url)
-//             const avatar = document.getElementById('avatar');
-//             img.setAttribute('src', url);
-//         })
-//         .catch((error) => {
-//             console.log(error)
-//         });
-// }
-
-
-// profileImage.addEventListener("change", function (uploadToStorage) {
-
-// });
-
-// getDownloadURL(ref(storage, 'users/user.uid'))
-//     .then((url) => {
-//         console.log(url)
-//         const avatar = document.getElementById('avatar');
-//         avatar.setAttribute('src', url);
-//     })
-//     .catch((error) => {
-//         console.log(error)
-//     });

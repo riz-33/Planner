@@ -12,7 +12,7 @@ const login = () => {
     signInWithEmailAndPassword(auth, email.value, password.value)
         .then((userCredential) => {
             const user = userCredential.user;
-            addDataToFirestore(user)
+            // addDataToFirestore(user)
             loader.style.display = "block"
             mainContent.style.display = "none"
             // window.location = "todo.html"
@@ -35,16 +35,16 @@ let loginBtn = document.getElementById("loginBtn");
 
 loginBtn.addEventListener("click", login);
 
-let addDataToFirestore = async (user) => {
-    const response = await setDoc(doc(db, "users", user.uid), {
-        name: user.displayName,
-        email: user.email,
-        number: user.phoneNumber,
-        photo: user.photoURL,
-        uid: user.uid
-    });
-    console.log ("resp", response)
-}
+// let addDataToFirestore = async (user) => {
+//     const response = await setDoc(doc(db, "users", user.uid), {
+//         name: user.displayName,
+//         email: user.email,
+//         number: user.phoneNumber,
+//         photo: user.photoURL,
+//         uid: user.uid
+//     });
+//     console.log ("resp", response)
+// }
 
 let googleLogin = () => {
     signInWithPopup(auth, googleProvider)
@@ -56,7 +56,7 @@ let googleLogin = () => {
             mainContent.style.display = "none"
             // window.location = "todo.html"
             console.log(user)
-            addDataToFirestore(user)
+            // addDataToFirestore(user)
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
