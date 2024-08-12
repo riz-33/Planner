@@ -24,17 +24,22 @@
 
         <div id="mainContent" class="main-content col-12 col-sm-12 col-md-12 col-lg-12">
             <h1 class="heading">Update Profile</h1>
-            <div id="userImage" class="userImage mb-2"></div>
+            <div class="image-div">
+                <div id="userImage" class="userImage"></div>
+                <div id="loaderImage" class="spinner-border text-primary image-loader" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <button id="imageBtn" type="submit" class="btn">Upload Image</button>
             <div id="name" class="input-container"></div>
             <div id="email" class="input-container"></div>
             <div id="number" class="input-container"></div>
             <button id="profileBtn" type="submit" class="btn">Update Profile</button>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="profile.js" type="module"></script>
-    <!-- <script src="app.js" type="module"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="profile.js" type="module"></script>
+        <!-- <script src="app.js" type="module"></script> -->
 
 </body>
 

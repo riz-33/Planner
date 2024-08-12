@@ -5,10 +5,10 @@
 
 body {
     font-family: RobotoSlab;
-    background-color: ghostwhite;
     margin: 0px;
     padding: 0px;
     width: 100%;
+    height: 100vh;
 }
 
 .container-fluid {
@@ -19,12 +19,26 @@ body {
     margin-top: 10%;
     width: 100px;
     height: 100px;
-    display: none;
     color: #397b44 !important;
     display: block;
 }
 
-.main-content{
+.image-div{
+    display: flex;
+    justify-content: center;
+}
+
+.image-loader {
+    margin-top: 70px;
+    width: 50px;
+    height: 50px;
+    color: #397b44 !important;
+    display: block;
+    position: absolute;
+    display: none;
+}
+
+.main-content {
     display: none;
 }
 
@@ -39,11 +53,7 @@ body {
     flex-direction: column;
 }
 
-.userImage{
-    justify-content: center;
-}
-
-.avatar{
+.avatar {
     border-radius: 50%;
     box-shadow: 0 0 0 1px #1f232826;
     display: inline-block;
@@ -54,9 +64,10 @@ body {
     background-color: #fff;
     border: 1px solid #d0d7de;
     object-fit: cover;
+
 }
 
-.file{
+.file {
     font-size: smaller;
     justify-content: center;
     font-family: RobotoSlab;
@@ -100,13 +111,18 @@ body {
 .btn {
     background-color: #397b44 !important;
     color: white !important;
-    margin: 10px 0px;
-    padding: 10px !important;
+    margin-bottom: 30px;
+    padding: 2px !important;
     border: none !important;
     cursor: pointer;
     width: 50% !important;
     opacity: 0.9 !important;
     font-weight: 500 !important;
+}
+
+.button {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .btn:hover {

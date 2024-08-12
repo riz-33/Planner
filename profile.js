@@ -23,12 +23,12 @@ onAuthStateChanged(auth, async (user) => {
 
             if (docSnap.data().photo) {
                 userImage.innerHTML = `
-                    <img alt="" id="uploadIcon" src=${docSnap.data().photo} width="200"
-                height="200" class=" mb-1 avatar avatar-user width-full border color-bg-default">
-                <input type="file" id="file" class="file" style="display: none;"  />`
+                    <img alt="" id="uploadIcon" src=${docSnap.data().photo} style="width: 200px; height: 200px; 
+                    cursor: pointer;" class=" mb-2 avatar avatar-user width-full border color-bg-default">
+                    <input type="file" id="file" class="file" style="display: none;"  />`
             } else {
                 userImage.innerHTML =
-                    `<img class="mb-1 avatar" id="uploadIcon" src="/Images/user-plus.png" 
+                    `<img class="mb-2 avatar" id="uploadIcon" src="/Images/user-plus.png" 
                 style="width: 200px; height: 200px; cursor: pointer;" /> 
                     <input type="file" id="file" class="file" style="display: none;"  />`
                 // `<label class="mb-2" id="imageBtn" for="profileImage">
@@ -76,7 +76,7 @@ onAuthStateChanged(auth, async (user) => {
 
         const uploadImageToFirestore = (file) => {
             return new Promise((resolve, reject) => {
-                // const fileName = file.name
+                const fileName = file.name
                 const storageRef = ref(storage, user.uid);
                 const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -112,7 +112,7 @@ onAuthStateChanged(auth, async (user) => {
             console.log("uploadIcon", uploadIcon, "file", file);
 
             const userRef = doc(db, "users", user.uid);
-            if (docSnap.data().photo === "" || docSnap.data().photo === null) {
+            if (docSnap.data().photo === "" || docSnap.data().photo === null || docSnap.data().photo !== null) {
                 await updateDoc(userRef, {
                     photo: url
                 });
@@ -122,14 +122,21 @@ onAuthStateChanged(auth, async (user) => {
                 });
             };
             console.log("Image Updated")
-            // window.location = "todo.html"
+            if (location.pathname !== "/todo.html") {
+                window.location = "todo.html"
+            }
+            loader.style.display = "block"
+            mainContent.style.display = "none"
         };
+
+        const imageBtn = document.getElementById("imageBtn");
+        imageBtn.addEventListener("click", uploadFile);
 
         let updateProfile = async () => {
             const nameUpdate = document.getElementById("nameUpdate")
             const emailUpdate = document.getElementById("emailUpdate")
             const numberUpdate = document.getElementById("numberUpdate")
-            
+
             const userRef = doc(db, "users", user.uid);
             if (docSnap.data().name === "" || docSnap.data().name === null) {
                 await updateDoc(userRef, {
@@ -140,7 +147,7 @@ onAuthStateChanged(auth, async (user) => {
                     name: docSnap.data().name
                 });
             };
-            
+
             if (docSnap.data().email === "" || docSnap.data().email === null) {
                 await updateDoc(userRef, {
                     email: emailUpdate.value
@@ -160,8 +167,7 @@ onAuthStateChanged(auth, async (user) => {
                     number: docSnap.data().number
                 });
             };
-            console.log(number)
-            const imageUpload = await uploadFile();
+            //     console.log(number)
             // Swal.fire({
             //     position: "top-end",
             //     icon: "success",
@@ -169,23 +175,15 @@ onAuthStateChanged(auth, async (user) => {
             //     showConfirmButton: false
             // });
             console.log("Profile Updated")
-            // if (location.pathname !== "/todo.html") {
-            //     window.location = "todo.html"
-            // }
-            // loader.style.display = "block"
-            // mainContent.style.display = "none"
-    
-            
-            window.location = "todo.html"
+            if (location.pathname !== "/todo.html") {
+                window.location = "todo.html"
+            }
+            loader.style.display = "block"
+            mainContent.style.display = "none"
         }
-        
-        // let profileBtn = document.getElementById("profileBtn");
-        // profileBtn.addEventListener("click", updateProfile);
-
-
 
         const profileBtn = document.getElementById("profileBtn");
         profileBtn.addEventListener("click", updateProfile);
-        // uploadIcon.addEventListener ("change", uploadFile)
+
     }
 });
