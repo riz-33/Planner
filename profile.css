@@ -40,13 +40,10 @@ body {
 }
 
 .userImage{
-    /* display: flex; */
     justify-content: center;
-    /* position: relative; */
 }
 
 .avatar{
-    /* height: auto; */
     border-radius: 50%;
     box-shadow: 0 0 0 1px #1f232826;
     display: inline-block;

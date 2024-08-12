@@ -18,9 +18,7 @@ let addDataToFirestore = async (user) => {
 }
 
 const register = () => {
-    // const name = document.getElementById("name");
     const email = document.getElementById("email");
-    // const phone = document.getElementById("number");
     const password = document.getElementById("password");
 
     createUserWithEmailAndPassword(auth, email.value, password.value)
@@ -28,7 +26,6 @@ const register = () => {
             const user = userCredential.user;
             loader.style.display = "block"
             mainContent.style.display = "none"
-            // window.location = "todo.html"
             addDataToFirestore(user)
             console.log("user-->", user)
         })
@@ -95,8 +92,6 @@ onAuthStateChanged(auth, async (user) => {
         if (location.pathname !== "/signup.html") {
             window.location = "signup.html"
         }
-        // loader.style.display = "block"
-        // mainContent.style.display = "none"
         console.log("not login")
     }
 });

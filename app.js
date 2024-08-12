@@ -48,8 +48,6 @@ onAuthStateChanged(auth, async (user) => {
         if (location.pathname !== "/index.html") {
             window.location = "index.html"
         }
-        // loader.style.display = "block"
-        // mainContent.style.display = "none"
         console.log("not login")
     }
 }

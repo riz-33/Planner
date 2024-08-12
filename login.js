@@ -15,7 +15,6 @@ const login = () => {
             // addDataToFirestore(user)
             loader.style.display = "block"
             mainContent.style.display = "none"
-            // window.location = "todo.html"
             console.log("user-->", user)
         })
         .catch((error) => {
@@ -35,17 +34,6 @@ let loginBtn = document.getElementById("loginBtn");
 
 loginBtn.addEventListener("click", login);
 
-// let addDataToFirestore = async (user) => {
-//     const response = await setDoc(doc(db, "users", user.uid), {
-//         name: user.displayName,
-//         email: user.email,
-//         number: user.phoneNumber,
-//         photo: user.photoURL,
-//         uid: user.uid
-//     });
-//     console.log ("resp", response)
-// }
-
 let googleLogin = () => {
     signInWithPopup(auth, googleProvider)
         .then((result) => {
@@ -54,7 +42,6 @@ let googleLogin = () => {
             const user = result.user;
             loader.style.display = "block"
             mainContent.style.display = "none"
-            // window.location = "todo.html"
             console.log(user)
             // addDataToFirestore(user)
         }).catch((error) => {
