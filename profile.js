@@ -68,22 +68,26 @@ onAuthStateChanged(auth, async (user) => {
         document.getElementById('uploadIcon').addEventListener('click', function () {
             document.getElementById('file').click();
         });
-        const file = document.getElementById("file");
-        file.addEventListener("change", (e) => {
-            const uploadIcon = document.getElementById("uploadIcon");
-            uploadIcon.src = URL.createObjectURL(e.target.files[0])
-        });
+        // const file = document.getElementById("file");
+        // file.addEventListener("change", (e) => {
+        //     const uploadIcon = document.getElementById("uploadIcon");
+        //     uploadIcon.src = URL.createObjectURL(e.target.files[0])
+        // });
 
         const uploadImageToFirestore = (file) => {
             return new Promise((resolve, reject) => {
                 const fileName = file.name
                 const storageRef = ref(storage, user.uid);
                 const uploadTask = uploadBytesResumable(storageRef, file);
+                const loaderImage = document.getElementById("loaderImage")
 
                 uploadTask.on('state_changed',
                     (snapshot) => {
                         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                         console.log('Upload is ' + Math.round(progress) + '% done');
+                        if (progress) {
+                            loaderImage.style.display = "block"
+                        }
                         switch (snapshot.state) {
                             case 'paused':
                                 console.log('Upload is paused');
@@ -95,6 +99,11 @@ onAuthStateChanged(auth, async (user) => {
                     },
                     (error) => {
                         reject(error)
+                        Swal.fire({
+                            icon: "error",
+                            // title: "Oops...",
+                            text: error,
+                        });
                     },
                     () => {
                         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -114,8 +123,9 @@ onAuthStateChanged(auth, async (user) => {
             const userRef = doc(db, "users", user.uid);
             if (docSnap.data().photo === "" || docSnap.data().photo === null || docSnap.data().photo !== null) {
                 await updateDoc(userRef, {
-                    photo: url
+                    photo: url,
                 });
+                loaderImage.style.display = "none"
             } else {
                 await updateDoc(userRef, {
                     photo: docSnap.data().photo

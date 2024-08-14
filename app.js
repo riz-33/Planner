@@ -1,4 +1,4 @@
-import { auth, onAuthStateChanged, doc, db, getDoc } from "./firebase.js";
+import { auth, onAuthStateChanged, doc, db, getDoc, deleteDoc } from "./firebase.js";
 
 let loader = document.getElementById("loader");
 let mainContent = document.getElementById("mainContent");
@@ -52,4 +52,3 @@ onAuthStateChanged(auth, async (user) => {
     }
 }
 );
-

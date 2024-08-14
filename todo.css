@@ -30,17 +30,17 @@ body {
     background-color: #fff;
 }
 
-.offcanvas{
+.offcanvas {
     background-color: white !important;
     color: black !important;
 }
 
-.userImage{
+.userImage {
     display: flex;
     justify-content: center;
 }
 
-.avatar{
+.avatar {
     border-radius: 50%;
     box-shadow: 0 0 0 1px #1f232826;
     display: inline-block;
@@ -73,7 +73,7 @@ body {
     padding: 10px;
 }
 
-.form-control:hover{
+.form-control:hover {
     border: 2px solid #5cbf7e;
 }
 
@@ -82,13 +82,37 @@ body {
     color: white;
     border: none;
     cursor: pointer;
-    width: 25%;
+    width: 30%;
     opacity: 0.9;
     font-weight: 500;
+    padding: 1px;
 }
 
-.btn-outline-secondary{
+.deletebtn {
+    background-color: #DC2C2B;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    opacity: 0.9;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    padding: 1px;
+}
+
+.btn-outline-secondary {
     padding: 0px 10px;
+}
+
+.deletebtn:hover {
+    opacity: 1;
+    background-color: red;
+    color: white;
+}
+
+.deletebtn:focus {
+    color: white !important;
+    background-color: red !important;
 }
 
 .btn:hover {
@@ -110,7 +134,8 @@ body {
     text-align: left;
 }
 
-.list-group-item:hover, :focus {
+.list-group-item:hover,
+:focus {
     color: #fff;
     background-color: #397b44;
 }

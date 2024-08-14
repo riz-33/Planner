@@ -1,6 +1,6 @@
 import {
     auth, signOut, addDoc, collection, db, onSnapshot, query, serverTimestamp, orderBy, where, getDoc, doc,
-    onAuthStateChanged, updateDoc
+    onAuthStateChanged, updateDoc, getAuth
 } from "./firebase.js";
 
 let logout = () => {
@@ -82,3 +82,18 @@ onAuthStateChanged(auth, async (user) => {
         deleteTodo();
     }
 });
+
+// let deleteUser = () => {
+//     getAuth()
+//     const user = auth.currentUser; 
+//     user.delete()
+//     .then(() => {
+//       console.log('Successfully deleted user');
+//     })
+//     .catch((error) => {
+//       console.log('Error deleting user:', error);
+//     });
+// }
+
+// const deleteBtn = document.getElementById("deleteBtn");
+// deleteBtn.addEventListener('click', deleteUser);
