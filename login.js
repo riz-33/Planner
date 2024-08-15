@@ -1,5 +1,5 @@
 import {
-    auth, signInWithEmailAndPassword, googleProvider, signInWithPopup, GoogleAuthProvider, doc, setDoc, db
+    auth, signInWithEmailAndPassword, googleProvider, signInWithPopup, GoogleAuthProvider
 } from "./firebase.js";
 
 let loader = document.getElementById("loader");
@@ -12,7 +12,6 @@ const login = () => {
     signInWithEmailAndPassword(auth, email.value, password.value)
         .then((userCredential) => {
             const user = userCredential.user;
-            // addDataToFirestore(user)
             loader.style.display = "block"
             mainContent.style.display = "none"
             console.log("user-->", user)
@@ -31,7 +30,6 @@ const login = () => {
 }
 
 let loginBtn = document.getElementById("loginBtn");
-
 loginBtn.addEventListener("click", login);
 
 let googleLogin = () => {
@@ -43,7 +41,6 @@ let googleLogin = () => {
             loader.style.display = "block"
             mainContent.style.display = "none"
             console.log(user)
-            // addDataToFirestore(user)
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;

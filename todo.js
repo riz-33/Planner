@@ -1,6 +1,7 @@
 import {
     auth, signOut, addDoc, collection, db, onSnapshot, query, serverTimestamp, orderBy, where, getDoc, doc,
-    onAuthStateChanged, updateDoc, getAuth
+    onAuthStateChanged, updateDoc, deleteDoc, getDocs, reauthenticateWithCredential, EmailAuthProvider,
+    GoogleAuthProvider, reauthenticateWithPopup
 } from "./firebase.js";
 
 let logout = () => {
@@ -83,17 +84,73 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
-// let deleteUser = () => {
-//     getAuth()
-//     const user = auth.currentUser; 
-//     user.delete()
-//     .then(() => {
-//       console.log('Successfully deleted user');
-//     })
-//     .catch((error) => {
-//       console.log('Error deleting user:', error);
-//     });
-// }
+async function deleteUserDataAndAccount() {
+    const user = auth.currentUser;
+    if (user) {
+        try {
+            const subcollectionRef = collection(db, "users", user.uid, "todos");
+            const querySnapshot = await getDocs(subcollectionRef);
+            const deletePromises = querySnapshot.docs.map(doc => deleteDoc(doc.ref));
+            await Promise.all(deletePromises);
+            console.log("Subcollection deleted successfully.");
 
-// const deleteBtn = document.getElementById("deleteBtn");
-// deleteBtn.addEventListener('click', deleteUser);
+            const userDocRef = doc(db, "users", user.uid);
+            await deleteDoc(userDocRef);
+            console.log("User document deleted successfully.");
+
+            try {
+                await user.delete();
+                console.log("User account deleted successfully.");
+            } catch (error) {
+                if (error.code === 'auth/requires-recent-login') {
+                    console.error("User needs to reauthenticate before deleting the account.");
+                    await reauthenticateUser();
+                } else {
+                    console.error("Error deleting user account: ", error);
+                }
+            }
+        } catch (error) {
+            console.error("Error deleting user data: ", error);
+        }
+    } else {
+        console.log("No user is currently signed in.");
+    }
+}
+
+async function reauthenticateUser() {
+    const user = auth.currentUser;
+    const credential = EmailAuthProvider.credential(
+        user.email,
+        prompt("Please enter your password to confirm deletion:")
+    );
+
+    try {
+        await reauthenticateWithCredential(user, credential);
+        await deleteUserDataAndAccount(); // Retry deletion after reauthentication
+    } catch (error) {
+        console.error("Error reauthenticating: ", error);
+    }
+}
+
+async function reauthenticateUserWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    const user = auth.currentUser;
+    try {
+        await reauthenticateWithPopup(user, provider);
+        await deleteUserDataAndAccount(); // Retry deletion after reauthentication
+    } catch (error) {
+        console.error("Error reauthenticating with Google: ", error);
+    }
+}
+
+document.getElementById("confirmDeleteBtn").addEventListener("click", async () => {
+    await deleteUserDataAndAccount();
+});
+
+auth.onAuthStateChanged(user => {
+    if (user) {
+        console.log("User is signed in:", user);
+    } else {
+        console.log("No user is currently signed in.");
+    }
+});

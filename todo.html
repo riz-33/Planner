@@ -17,11 +17,13 @@
 
 <body>
     <nav class="navbar bg-body-tertiary fixed-top">
-        <a class="navbar-brand" href="#">Planner</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand" href="todo.html">Planner</a>
+        <div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Profile</h5>
@@ -39,12 +41,34 @@
                         </a><a id="number" class="nav-link" href="/profile.html">Update Profile</a>
                     </li>
                     <button id="logoutBtn" class="mb-2 btn logoutBtn btn-outline-success" type="submit">Logout</button>
-                    <button id="deleteBtn" class="deletebtn btn-outline-success" type="submit">Delete User</button>
+                    <button id="deleteAccountBtn" type="button" class="deletebtn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Delete User
+                    </button>
             </div>
         </div>
     </nav>
 
     <div class="container-fluid col-10 col-sm-8 col-md-7 col-lg-5 p-5">
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Account</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="confirmDeleteBtn" type="button" class="deletebtn btn-secondary">Yes, Delete</button>
+                        <button id="cancelDeleteBtn" type="button" class="btn btn-primary"
+                            data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div id="loader" class="spinner-border text-primary theme-loader" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -57,9 +81,9 @@
                 <input id="todo" type="text" class="form-control" placeholder="Add Task"
                     aria-label="Recipient's username" aria-describedby="button-addon2">
                 <button class="btn btn-outline-secondary" type="button" id="addTodoBtn">Add</button>
-            </div>            
-                <ul id="todoList" class="list-group">
-                </ul>
+            </div>
+            <ul id="todoList" class="list-group">
+            </ul>
         </div>
     </div>
 

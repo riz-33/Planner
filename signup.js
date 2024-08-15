@@ -12,7 +12,8 @@ let addDataToFirestore = async (user) => {
         email: user.email,
         number: user.phoneNumber,
         photo: user.photoURL,
-        uid: user.uid
+        uid: user.uid,
+        createdAt: serverTimestamp()
     });
     console.log("resp", response)
 }

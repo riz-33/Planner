@@ -25,6 +25,10 @@ body {
     font-weight: 700;
 }
 
+.navbar-brand:hover {
+    color: #fff;
+}
+
 .navbar-toggler {
     margin-right: 10px;
     background-color: #fff;
@@ -33,6 +37,10 @@ body {
 .offcanvas {
     background-color: white !important;
     color: black !important;
+}
+
+.d-flex {
+    justify-content: space-between;
 }
 
 .userImage {
