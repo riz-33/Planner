@@ -115,6 +115,13 @@ async function deleteUserDataAndAccount() {
     } else {
         console.log("No user is currently signed in.");
     }
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Account deleted successfully",
+        showConfirmButton: false,
+        timer: 1500
+    });
 }
 
 async function reauthenticateUser() {
