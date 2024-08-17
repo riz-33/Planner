@@ -126,7 +126,7 @@ async function reauthenticateUser() {
 
     try {
         await reauthenticateWithCredential(user, credential);
-        await deleteUserDataAndAccount(); // Retry deletion after reauthentication
+        await deleteUserDataAndAccount();
     } catch (error) {
         console.error("Error reauthenticating: ", error);
     }
@@ -137,7 +137,7 @@ async function reauthenticateUserWithGoogle() {
     const user = auth.currentUser;
     try {
         await reauthenticateWithPopup(user, provider);
-        await deleteUserDataAndAccount(); // Retry deletion after reauthentication
+        await deleteUserDataAndAccount();
     } catch (error) {
         console.error("Error reauthenticating with Google: ", error);
     }

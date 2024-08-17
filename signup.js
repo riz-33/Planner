@@ -1,6 +1,6 @@
 import {
     auth, createUserWithEmailAndPassword, googleProvider, signInWithPopup, GoogleAuthProvider, doc, setDoc, db,
-    onAuthStateChanged, getDoc
+    onAuthStateChanged, getDoc, serverTimestamp
 } from "./firebase.js";
 
 let loader = document.getElementById("load");

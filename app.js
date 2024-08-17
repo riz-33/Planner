@@ -1,4 +1,4 @@
-import { auth, onAuthStateChanged, doc, db, getDoc, deleteDoc } from "./firebase.js";
+import { auth, onAuthStateChanged, doc, db, getDoc } from "./firebase.js";
 
 let loader = document.getElementById("loader");
 let mainContent = document.getElementById("mainContent");
@@ -9,9 +9,13 @@ const userImage = document.getElementById("userImage");
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        const docRef = doc(db, "users", user.uid);
+        const docRef = await doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
+        if (!docSnap.exists()) {
+            await addDataToFirestore(user);
+        }
         console.log("doc", docSnap.data())
+
         if (docSnap.data()) {
             if (location.pathname !== "/todo.html") {
                 window.location = "todo.html"
