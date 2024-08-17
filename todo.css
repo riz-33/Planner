@@ -172,3 +172,7 @@ body {
     color: #fff;
     background-color: #397b44;
 }
+
+.modal-footer{
+    display: inline;
+}
